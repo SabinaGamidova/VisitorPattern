@@ -4,9 +4,8 @@ module Visitable
   end
 end
 
-class Product
-  include Visitable
-
+class Product 
+    include Visitable
   attr_reader :name, :price
   def initialize(name:, price:)
     @name = name
@@ -14,8 +13,8 @@ class Product
   end
 end
 
-class Order
-  include Visitable
+class Order 
+    include Visitable
 
   def initialize
     @products = []
@@ -32,26 +31,29 @@ class Order
   end
 end
 
-class Visitor
+module Visitor
   def visit(subject)
     raise NotImpelementedError.new
   end
 end
 
-class ProductsPrinterVisitor < Visitor
+class ProductsPrinterVisitor 
+    include Visitor
   def visit(subject)
     puts "Product: #{subject.name} - $#{subject.price}"
   end
 end
 
-class HalfPriceSimulatorVisitor < Visitor
+class HalfPriceSimulatorVisitor 
+    include Visitor
   def visit(subject)
     puts "Product: #{subject.name} - after 50% discount: $#{subject.price / 2.0}"
   end
 end
 
 
-class TaxCalculatorVisitor < Visitor
+class TaxCalculatorVisitor 
+    include Visitor
   def visit(subject)
     tax = subject.price * 0.2 # Налог в размере 20% от цены продукта
     puts "Tax for Product: #{subject.name} - $#{tax}"

@@ -1,9 +1,5 @@
-class Shape
+module Shape
   def move(x, y)
-    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
-  end
-
-  def draw
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
 
@@ -13,7 +9,8 @@ class Shape
 end
 
 
-class Dot < Shape
+class Dot 
+  include Shape
 
     def move(x, y)
         [x, y] 
@@ -25,7 +22,8 @@ class Dot < Shape
 end
 
 
-class Circle < Shape
+class Circle 
+  include Shape
 
     def move(x, y)
         [x, y] 
@@ -37,7 +35,8 @@ class Circle < Shape
 end
 
 
-class Rectangle < Shape
+class Rectangle 
+  include Shape
 
     def move(x, y)
         [x, y] 
@@ -49,7 +48,8 @@ class Rectangle < Shape
 end
 
 
-class CompoundShape < Shape
+class CompoundShape 
+  include Shape
 
     def move(x, y)
         [x, y] 
@@ -61,7 +61,7 @@ class CompoundShape < Shape
 end
 
 
-class Visitor
+module Visitor
   def visit_dot(dot)
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
@@ -80,21 +80,21 @@ class Visitor
 end
 
 
-class XMLExportVisitor < Visitor
+class XMLExportVisitor include Visitor
   def visit_dot(dot)
-    puts "Exporting Dot with id: #{dot.object_id} and coordinates: #{dot.move(0, 0)}"
+    puts "Exporting Dot with id: #{dot.object_id} and coordinates: #{dot.move(1, 2)}"
   end
 
   def visit_circle(circle)
-    puts "Exporting Circle with id: #{circle.object_id} and coordinates: #{circle.move(0, 0)}"
+    puts "Exporting Circle with id: #{circle.object_id} and coordinates: #{circle.move(3, 4)}"
   end
 
   def visit_rectangle(rectangle)
-    puts "Exporting Rectangle with id: #{rectangle.object_id} and coordinates: #{rectangle.move(0, 0)}"
+    puts "Exporting Rectangle with id: #{rectangle.object_id} and coordinates: #{rectangle.move(5, 6)}"
   end
 
   def visit_compound_shape(compound_shape)
-    puts "Exporting CompoundShape with id: #{compound_shape.object_id}"
+    puts "Exporting CompoundShape with id: #{compound_shape.object_id} and coordinates: #{compound_shape.move(7, 8)}"
   end
 end
 
